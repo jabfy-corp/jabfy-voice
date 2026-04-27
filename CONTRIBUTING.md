@@ -6,38 +6,45 @@ Every contribution must be tied to an existing issue. If no issue exists for you
 
 ## Branch Naming
 
-Branches must follow this pattern:
-
 ```
-<issue-number>-<short-description>
+<repo>-<issue-number>-<short-description>
 ```
 
-Examples: `12-fix-tts-crash`, `7-add-voice-wake-word`
+Available repo prefixes: `core`, `tts`, `voice`, `guard`, `proto`, `mobile`, `desktop`, `web`
 
-## Workflow
+Example: `tts-1-wiki-documentation`
 
-1. Pick or create an issue
-2. Create a branch from `main` using the naming convention above
-3. Make your changes
-4. Open a pull request  use `Closes #<issue-number>` in the PR body
-5. Wait for the PR validation check to pass
-6. Request a review
+Always open an issue before creating a branch.
 
-## Commit Messages
+## Commit Naming
 
-Follow conventional commits:
+```
+<type>: <description>
+```
 
-| Prefix | Use for |
+| Type | Use for |
 |---|---|
-| `feat:` | New feature |
-| `fix:` | Bug fix |
-| `docs:` | Documentation only |
-| `refactor:` | Code change with no behavior change |
-| `ci:` | CI / workflow changes |
-| `chore:` | Maintenance, deps, tooling |
+| `feat` | New feature or prototype |
+| `fix` | Bug fix |
+| `chore` | Maintenance / tooling / CI |
+| `docs` | Documentation only |
+| `refractor` | Refactoring (no functional change) |
+| `test` | Tests only |
 
-## Code Style
+Example: `docs: created wiki documentation`
 
-- TypeScript strict mode
-- No unused imports or variables
-- Run `npm run lint` before pushing
+## Pull Requests
+
+Use `Closes #<issue-number>` in the PR body to link to the issue. PRs without a linked issue will fail validation.
+
+## Release Naming
+
+Tag format: `Year.MonthDay.Version` (version starts at 0)
+
+Title format: `Tag-Status`
+
+Available statuses: `pre-release`, `beta` (for stable releases, use only the tag as title)
+
+Example:
+- Tag: `2026.324.0`
+- Title: `2026.324.0-pre-release`
