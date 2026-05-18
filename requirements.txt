@@ -1,0 +1,4 @@
+faster-whisper
+pyaudio
+ollama
+pyttsx3
