@@ -2,3 +2,4 @@ faster-whisper
 pyaudio
 ollama
 pyttsx3
+flask
