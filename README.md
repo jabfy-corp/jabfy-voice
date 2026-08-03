@@ -126,6 +126,24 @@ segments, _ = model.transcribe(io.BytesIO(audio_bytes), language="fr")
 
 Replace `"fr"` with any [Whisper-supported language code](https://github.com/openai/whisper#available-models-and-languages).
 
+### Run in a container
+
+Pushes to `main` publish `ghcr.io/jabfy-corp/jabfy-voice` with `latest` and
+commit-SHA tags. For a reproducible deployment, use the digest produced by the
+workflow.
+
+The container serves the Flask UI on port `5000` and disables microphone capture
+by default (`JABFY_VOICE_ENABLE_AUDIO=false`), because audio devices are host
+specific. Enable it only on a host where the microphone and audio stack are
+explicitly passed through. Point `OLLAMA_HOST` to a reachable Ollama instance;
+Ollama and Whisper models are not embedded as credentials in the image.
+
+```bash
+docker run --rm -p 5000:5000 \
+  -e OLLAMA_HOST=http://host.docker.internal:11434 \
+  ghcr.io/jabfy-corp/jabfy-voice@sha256:<digest>
+```
+
 ### Change the speech rate
 
 Edit `tts.py`, line 10:

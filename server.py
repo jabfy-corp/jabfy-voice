@@ -1,3 +1,4 @@
+import os
 import threading
 from flask import Flask, render_template, jsonify
 from mic import record_until_silence
@@ -56,6 +57,12 @@ def state():
 
 
 if __name__ == "__main__":
-    t = threading.Thread(target=_voice_loop, daemon=True)
-    t.start()
+    audio_enabled = os.getenv("JABFY_VOICE_ENABLE_AUDIO", "true").lower() in {
+        "1", "true", "yes", "on"
+    }
+    if audio_enabled:
+        t = threading.Thread(target=_voice_loop, daemon=True)
+        t.start()
+    else:
+        _set_status("audio_disabled")
     app.run(host="0.0.0.0", port=5000, debug=False)
